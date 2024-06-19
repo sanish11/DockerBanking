@@ -1,23 +1,32 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:8-jdk-alpine
+# Use an official Maven runtime as a parent image
+FROM maven:3.8.4-openjdk-11-slim AS build
 
-# Create a volume to hold application data
-VOLUME /tmp
+# Set the working directory
+WORKDIR /app
 
-# Add a label to mark the maintainer of the image
-LABEL maintainer="sanis.mrzan@gmail.com"
+# Copy the Maven project descriptor files
+COPY pom.xml ./
 
-# Argument for JVM options
-ARG JAVA_OPTS
+# Resolve dependencies
+RUN mvn dependency:go-offline
 
-# Environment variable to hold JVM options
-ENV JAVA_OPTS=$JAVA_OPTS
+# Copy the entire project source
+COPY src ./src
 
-# Copy the WAR file into the container at /app.war
-COPY target/backend-0.0.1-SNAPSHOT.war /app.war
+# Build the Java application (adjust the command based on your project)
+RUN mvn clean package
+
+# Stage 2: Create a minimal runtime image
+FROM openjdk:11-jre-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the compiled artifact from the build stage
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.war ./app.war
 
 # Expose port 8080 (adjust if your application listens on a different port)
 EXPOSE 8080
 
-# Run the application using java -jar command
-CMD ["java", "-jar", "/app.war"]
+# Command to run the Java application
+CMD ["java", "-jar", "app.war"]
