@@ -7,7 +7,7 @@ WORKDIR /app
 RUN  npm install -g @angular/cli@9.0.6
 
 # Install dependencies including querystring
-RUN npm install && npm install querystring
+RUN npm install 
 
 
 # Copy package.json and package-lock.json
