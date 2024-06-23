@@ -4,7 +4,7 @@ FROM node:12 AS build
 # Set the working directory
 WORKDIR /app
 
-
+RUN  npm install -g @angular/cli@9.0.6
 
 # Install dependencies including querystring
 RUN npm install && \
