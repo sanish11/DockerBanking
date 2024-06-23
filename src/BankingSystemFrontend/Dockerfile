@@ -4,8 +4,7 @@ FROM node:12 AS build
 # Set the working directory
 WORKDIR /app
 
-# Install Angular CLI version 12 globally
-RUN npm install -g @angular/cli@12
+
 
 # Install dependencies including querystring
 RUN npm install && \
