@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: sanish1212/bankingsystembackend:71 # Use the image name you tagged when building the backend Docker image
+    image: sanish1212/bankingsystembackend:latest # Use the image name you tagged when building the backend Docker image
     ports:
       - "8080:8080"  # Map container port 8080 to host port 8080
     networks:
