@@ -4,12 +4,14 @@ FROM node:12 AS build
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+
 
 # Install dependencies including querystring
 RUN npm install && \
     npm install querystring
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
 # Copy the rest of the application code
 COPY . .

@@ -93,22 +93,10 @@
 #register-navbar a{
     color: #FFF;
 }
-.register-background .container{
+.register-background .container {
     margin-top: 11%;
     position: relative;
     z-index: 3;
-}
-.register-footer{
-    bottom: 20px;
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    background: transparent;
-    color: $white-color;
-    left: 0;
-}
-.register-footer .fa-heart{
-    color: #EB5E28;
 }
 
 .register-card label{

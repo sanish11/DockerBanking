@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   backend:
-    image: sanish1212/bankingsystembackend:latest # Use the image name you tagged when building the backend Docker image
+    image: sanish1212/bankingsystembackend:72 # Use the image name you tagged when building the backend Docker image
     ports:
       - "8080:8080"  # Map container port 8080 to host port 8080
     networks:
       - app-network  # Attach to the custom network named app-network
 
   frontend:
-    image: sanish1212/bankingsystemfrontend:71  # Use the image name you tagged when building the frontend Docker image
+    image: sanish1212/bankingsystemfrontend:72  # Use the image name you tagged when building the frontend Docker image
     ports:
       - "8084:80"  # Map container port 80 to host port 80
     networks:
