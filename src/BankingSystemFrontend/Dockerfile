@@ -7,8 +7,7 @@ WORKDIR /app
 # Install dependencies including querystring
 RUN npm install && \
     npm install querystring
-# Install Angular CLI version 12 globally
-RUN npm install -g @angular/cli@12
+
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
