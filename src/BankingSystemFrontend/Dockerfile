@@ -4,14 +4,14 @@ FROM node:12 AS build
 # Set the working directory
 WORKDIR /app
 
-RUN  npm install -g @angular/cli@9.0.6
+# Install Angular CLI globally
+RUN npm install -g @angular/cli@9.0.6
 
-# Install dependencies including querystring
-RUN npm install 
-
-
-# Copy package.json and package-lock.json
+# Copy package.json and package-lock.json first to leverage Docker cache
 COPY package*.json ./
+
+# Install dependencies
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
@@ -23,7 +23,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copy the build output to the Nginx HTML directory
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist/ /usr/share/nginx/html
 
 # Expose the port on which the application will run
 EXPOSE 80
